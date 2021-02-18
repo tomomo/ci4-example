@@ -1,4 +1,11 @@
 <?php
+/**
+ * BaseController.php
+ *
+ * @package App\Database\Migrations
+ * @author  tomomo <eclairpark@gmail.com>
+ * @license http://www.opensource.org/licenses/mit-license.html  MIT License
+ */
 
 namespace App\Controllers;
 
@@ -16,8 +23,9 @@ use Psr\Log\LoggerInterface;
  *     class Home extends BaseController
  *
  * For security be sure to declare any new methods as protected or private.
+ *
+ * @package App\Database\Migrations
  */
-
 class BaseController extends Controller
 {
 	/**
@@ -32,9 +40,11 @@ class BaseController extends Controller
 	/**
 	 * Constructor.
 	 *
-	 * @param RequestInterface  $request
-	 * @param ResponseInterface $response
-	 * @param LoggerInterface   $logger
+	 * @param RequestInterface  $request  Request
+	 * @param ResponseInterface $response Response
+	 * @param LoggerInterface   $logger   Logger
+	 *
+	 * @return void
 	 */
 	public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
 	{
@@ -44,6 +54,6 @@ class BaseController extends Controller
 		//--------------------------------------------------------------------
 		// Preload any models, libraries, etc, here.
 		//--------------------------------------------------------------------
-		// E.g.: $this->session = \Config\Services::session();
+		$this->session = \Config\Services::session();
 	}
 }

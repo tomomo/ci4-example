@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:disable
 
 namespace Config;
 
@@ -29,8 +29,8 @@ class Filters extends BaseConfig
 	 */
 	public $globals = [
 		'before' => [
+			'csrf',
 			// 'honeypot',
-			// 'csrf',
 		],
 		'after'  => [
 			'toolbar',

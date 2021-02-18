@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:disable
 
 namespace Config;
 
@@ -15,7 +15,7 @@ class Security extends BaseConfig
 	 *
 	 * @var string
 	 */
-	public $tokenName = 'csrf_test_name';
+	public $tokenName = 'csrftoken';
 
 	/**
 	 * --------------------------------------------------------------------------
@@ -37,7 +37,7 @@ class Security extends BaseConfig
 	 *
 	 * @var string
 	 */
-	 public $cookieName = 'csrf_cookie_name';
+	 public $cookieName = '_csrf';
 
 	/**
 	 * --------------------------------------------------------------------------
@@ -84,9 +84,10 @@ class Security extends BaseConfig
 	 * Allowed values are: None - Lax - Strict - ''.
 	 *
 	 * Defaults to `Lax` as recommended in this link:
+	 *
 	 * @see https://portswigger.net/web-security/csrf/samesite-cookies
 	 *
-       * @var string 'Lax'|'None'|'Strict'
+	 * @var string 'Lax'|'None'|'Strict'
 	 */
 	public $samesite = 'Lax';
 }

@@ -1,4 +1,11 @@
 <?php
+/**
+ * Autoload.php
+ *
+ * @package Config
+ * @author  tomomo <eclairpark@gmail.com>
+ * @license http://www.opensource.org/licenses/mit-license.html  MIT License
+ */
 
 namespace Config;
 
@@ -14,6 +21,8 @@ use CodeIgniter\Config\AutoloadConfig;
  *
  * NOTE: If you use an identical key in $psr4 or $classmap, then
  * the values in this file will overwrite the framework's values.
+ *
+ * @package Config
  */
 class Autoload extends AutoloadConfig
 {
@@ -40,8 +49,9 @@ class Autoload extends AutoloadConfig
 	 * @var array<string, string>
 	 */
 	public $psr4 = [
-		APP_NAMESPACE => APPPATH, // For custom app namespace
+		APP_NAMESPACE => APPPATH,
 		'Config'      => APPPATH . 'Config',
+		'Common'      => APPPATH . 'Modules/Common',
 	];
 
 	/**

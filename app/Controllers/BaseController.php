@@ -2,7 +2,7 @@
 /**
  * BaseController.php
  *
- * @package App\Database\Migrations
+ * @package App\Controllers
  * @author  tomomo <eclairpark@gmail.com>
  * @license http://www.opensource.org/licenses/mit-license.html  MIT License
  */
@@ -24,7 +24,7 @@ use Psr\Log\LoggerInterface;
  *
  * For security be sure to declare any new methods as protected or private.
  *
- * @package App\Database\Migrations
+ * @package App\Controllers
  */
 class BaseController extends Controller
 {

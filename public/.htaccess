@@ -47,3 +47,10 @@ Options All -Indexes
 # Disable server signature start
     ServerSignature Off
 # Disable server signature end
+
+# ----------------------------------------------------------------------
+# PHP Value
+# ----------------------------------------------------------------------
+# php_value memory_limit 128M
+# php_value post_max_size 8M
+php_value upload_max_filesize 8M

@@ -1,29 +1,31 @@
 <?php
 /**
- * Home.php
+ * File.php
  *
- * @package App\Controllers
+ * @package Common\Controllers
  * @author  tomomo <eclairpark@gmail.com>
  * @license http://www.opensource.org/licenses/mit-license.html  MIT License
  */
 
-namespace App\Controllers;
+namespace Common\Controllers;
+
+use App\Controllers\BaseController;
 
 /**
  * Class Home
  *
- * @package App\Controllers
+ * @package Common\Controllers
  */
 class Home extends BaseController
 {
 	/**
-	 * ホーム画面表示
+	 * Index
 	 *
-	 * @return void
+	 * @return view
 	 */
 	public function index()
 	{
-		phpinfo();
-		// return view('welcome_message');
+		helper('form');
+		return view('Common\Views\home.html');
 	}
 }

@@ -1,0 +1,111 @@
+<?= $this->extend('example.html') ?>
+
+<?= $this->section('content') ?>
+<div class="container">
+  <h1 class="display-4">FileUpload Example</h1>
+  <div class="my-3">
+    <div class="col-sm-10">
+      <label>
+        <i class="fas fa-2x fa-folder-open text-primary"></i>
+        <input style="display: none;" type="file" id="upfile" accept="image/*,application/pdf,text/csv,text/plain"
+        multiple>
+      </label>
+      <div class="row" id="attachments">
+        <div class="col-md-6 col-lg-4" v-for="item in items" :key="item.name">
+          <i class="fas fa-2x text-info p-2 handle-item" :class="item.icon"></i>
+          <i class="fas fa-times-circle"></i>
+          <img v-if="item.src" class="img-thumbnail" :src="item.src" alt="item.name">
+          <input type="hidden" name="file[]" :value="item.url">
+        </div>
+      </div><!-- #attachments -->
+    </div>
+  </div>
+</div>
+<?= $this->endSection() ?>
+
+<?= $this->section('style') ?>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta2/css/bootstrap.min.css" integrity="sha512-aqT9YD5gLuLBr6ipQAS+72o5yHKzgZbGxEh6iY8lW/r6gG14e2kBTAJb8XrxzZrMOgSmDqtLaF76T0Z6YY2IHg==" crossorigin="anonymous" />
+<?= $this->endSection() ?>
+
+<?= $this->section('script') ?>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta2/js/bootstrap.bundle.min.js" integrity="sha512-43iShtbiyImxjjU4a9rhXBy7eKtIsrpll8xKhe1ghKqh5NyfME8phZs5JRFZpRBe1si44WM3tNmnqMym7JRmDQ==" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.5/vue.global.prod.js" integrity="sha512-7mjRUL9551cOFF57PSrURwSa9UsUmufUCU9icwUEoUrECcxpa20PakbPplb7b4ZGbCc0StIr9ytHoXH9+v6ygA==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.13.0/Sortable.min.js" integrity="sha512-5x7t0fTAVo9dpfbp3WtE2N6bfipUwk7siViWncdDoSz2KwOqVC1N9fDxEOzk0vTThOua/mglfF8NO7uVDLRC8Q==" crossorigin="anonymous"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  const csrftoken = document.querySelector('meta[name="X-CSRF-TOKEN"]')?.content;
+  const fileInput = this.getElementById('upfile');
+
+  Vue.createApp({
+    data() {
+      return {
+        loading: false,
+        items: []
+      }
+    },
+    mounted() {
+      fileInput.addEventListener('change', this.handleFileSelect);
+    },
+    methods: {
+      uploadFile(file) {
+        const headers = {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest'
+        };
+        if (csrftoken) {
+          headers['X-CSRF-TOKEN'] = csrftoken;
+        }
+        const fd = new FormData();
+        fd.append('attachment', file);
+        return axios.post('/file/upload', fd, { headers });
+      },
+      async handleFileSelect() {
+        this.loading = true;
+
+        const this_ = this;
+        const files = Array.from(fileInput.files);
+        const response = await Promise.allSettled(files.map(f => this_.uploadFile(f)));
+        const responses = Array.isArray(response) ? response : [response];
+        const errors = [];
+        responses.forEach(response => {
+          const data = (response.status === 'fulfilled') ? response.value.data : response.reason.response.data;
+          if (response.status === 'fulfilled') {
+            if (data.type === 'application/pdf') {
+              data.icon = 'fa-file-pdf';
+            } else if (data.type === 'text/csv') {
+              data.icon = 'fa-file-csv';
+            } else if (['image/jpeg', 'image/gif', 'image/png'].indexOf(data.type)) {
+              data.src = data.url;
+              data.icon = 'fa-file-image';
+            } else {
+              data.icon = 'fa-file-alt';
+            }
+            data.title = 'New File';
+            console.log('data: ', data);
+            this.items.push(data);
+          }
+          else {
+            errors.push(data);
+          }
+        });
+        if (errors.length) {
+          alert(errors.join("\n"));
+          console.log(errors);
+        }
+        this.loading = false;
+      }
+    }
+  }).mount('#attachments');
+
+  new Sortable(attachments, {
+    animation: 150,
+    ghostClass: 'bg-primary',
+    handle: '.handle-item',
+  });
+});
+</script>
+<?= $this->endSection() ?>

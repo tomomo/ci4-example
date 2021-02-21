@@ -11,8 +11,8 @@ namespace Common\Config;
 
 $routes->group('file', ['namespace' => 'Common\Controllers'], function ($routes) {
 	$routes->post('upload', 'File::upload', ['namespace' => 'Common\Controllers']);
-	$routes->get('show/(.+)', 'File::show/$1', ['namespace' => 'Common\Controllers']);
-	$routes->get('download/(.+)', 'File::download/$1', ['namespace' => 'Common\Controllers']);
+	$routes->get('show/(:any)', 'File::show/$1', ['namespace' => 'Common\Controllers']);
+	$routes->get('download/(:any)', 'File::download/$1', ['namespace' => 'Common\Controllers']);
 });
 
 // FileUpload Example

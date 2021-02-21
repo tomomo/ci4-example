@@ -30,15 +30,14 @@ class File extends BaseController
 	 */
 	private $uploadPath = WRITEPATH . 'uploads' . DIRECTORY_SEPARATOR;
 
-	// phpcs:ignore
 	/**
 	 * ファイル表示
-	 * // phpcs:ignore
-	 * @param mixed $fileNames ファイル名
+	 *
+	 * @param string ...$fileNames ファイル名
 	 *
 	 * @return response
 	 */
-	public function show(...$fileNames)
+	public function show(string ...$fileNames)
 	{
 		$fileName = implode('/', $fileNames);
 		$filePath = $this->uploadPath . $fileName;
@@ -58,16 +57,14 @@ class File extends BaseController
 		}
 	}
 
-	// phpcs:ignore
 	/**
 	 * ファイルダウンロード
 	 *
-	 * 	// phpcs:ignore
-	 * @param mixed $fileNames ファイル名
+	 * @param string ...$fileNames ファイル名
 	 *
 	 * @return response
 	 */
-	public function download(...$fileNames)
+	public function download(string ...$fileNames)
 	{
 		$fileName = implode('/', $fileNames);
 		$filePath = $this->uploadPath . $fileName;

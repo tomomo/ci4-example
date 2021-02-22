@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
               data.icon = 'fa-file-pdf';
             } else if (data.type === 'text/csv') {
               data.icon = 'fa-file-csv';
-            } else if (['image/jpeg', 'image/gif', 'image/png'].indexOf(data.type)) {
+            } else if ((data.type).indexOf('image/') === 0) {
               data.src = data.url;
               data.icon = 'fa-file-image';
             } else {

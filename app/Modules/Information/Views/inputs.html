@@ -1,0 +1,67 @@
+<div class="mb-3 row">
+  <label class="col-md-2 col-form-label" for="subject"><?= lang('Information.subject') ?></label>
+  <div class="col-md-10">
+    <?= form_input([
+      'class' => 'form-control' . ((session('invalid.subject')) ? ' is-invalid' : ''),
+      'id' => 'subject',
+      'name' => 'subject',
+      'value' => old('subject', $information->subject),
+      'autofocus' => true
+    ]) ?>
+    <div class="invalid-feedback">
+      <?= session('invalid.subject') ?>
+    </div>
+  </div>
+</div>
+<div class="mb-3 row">
+  <label class="col-md-2 col-form-label" for="body"><?= lang('Information.body') ?></label>
+  <div class="col-md-10">
+    <?= form_textarea([
+      'class' => 'form-control' . ((session('invalid.body')) ? ' is-invalid' : ''),
+      'id' => 'body',
+      'rows' => 6,
+      'name' => 'body',
+      'value' => old('body', $information->body),
+    ]) ?>
+    <div class="invalid-feedback">
+      <?= session('invalid.body') ?>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-2 col-form-label"><?= lang('Information.period') ?></label>
+  <div class="col-md-10">
+    <div class="row mb-3">
+      <div class="col-sm-6 col-md-4" style="max-width: 250px;">
+        <div class="input-group">
+          <?= form_input([
+            'class' => 'form-control' . ((session('invalid.release_start_at')) ? ' is-invalid' : ''),
+            'id' => 'releaseStartAt',
+            'name' => 'release_start_at',
+            'value' => old('release_start_at', $information->releaseStartAt),
+          ]) ?>
+          <button class="btn btn-outline-secondary" type="button"
+            style="border-top-right-radius: 5px; border-bottom-right-radius: 5px;"><i class="fas fa-ban"></i></button>
+          <div class="invalid-feedback">
+            <?= session('invalid.release_start_at') ?>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4" style="max-width: 250px;">
+        <div class="input-group">
+          <?= form_input([
+            'class' => 'form-control' . ((session('invalid.release_finish_at')) ? ' is-invalid' : ''),
+            'id' => 'releaseFinishAt',
+            'name' => 'release_finish_at',
+            'value' => old('release_finish_at', $information->releaseFinishAt),
+          ]) ?>
+          <button class="btn btn-outline-secondary" type="button"
+            style="border-top-right-radius: 5px; border-bottom-right-radius: 5px;"><i class="fas fa-ban"></i></button>
+          <div class="invalid-feedback">
+            <?= session('invalid.release_finish_at') ?>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

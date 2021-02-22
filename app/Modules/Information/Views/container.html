@@ -1,0 +1,26 @@
+<?= $this->extend('example.html') ?>
+
+<?= $this->section('content') ?>
+<div class="container-fluid">
+  <h1 class="display-4"><?= lang('Information\Information.funcTitle') ?></h1>
+  <main>
+    <?= $this->renderSection('content') ?>
+  </main>
+</div>
+<?= $this->endSection() ?>
+
+<?= $this->section('style') ?>
+<?= $this->renderSection('style') ?>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta2/css/bootstrap.min.css" integrity="sha512-aqT9YD5gLuLBr6ipQAS+72o5yHKzgZbGxEh6iY8lW/r6gG14e2kBTAJb8XrxzZrMOgSmDqtLaF76T0Z6YY2IHg==" crossorigin="anonymous" />
+<style>
+html body {
+  background-color: #f9f9f9;
+}
+</style>
+<?= $this->endSection() ?>
+
+<?= $this->section('script') ?>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta2/js/bootstrap.bundle.min.js" integrity="sha512-43iShtbiyImxjjU4a9rhXBy7eKtIsrpll8xKhe1ghKqh5NyfME8phZs5JRFZpRBe1si44WM3tNmnqMym7JRmDQ==" crossorigin="anonymous"></script>
+<?= $this->renderSection('script') ?>
+<?= $this->endSection() ?>

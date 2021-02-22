@@ -1,9 +1,23 @@
 <?php
+/**
+ * Pager.php
+ *
+ * @package Config
+ * @author  tomomo <eclairpark@gmail.com>
+ * @license http://www.opensource.org/licenses/mit-license.html  MIT License
+ */
 
 namespace Config;
 
 use CodeIgniter\Config\BaseConfig;
 
+/**
+ * Class Pager
+ *
+ * @package Config
+ * @author  tomomo <eclairpark@gmail.com>
+ * @license http://www.opensource.org/licenses/mit-license.html  MIT License
+ */
 class Pager extends BaseConfig
 {
 	/**
@@ -21,7 +35,7 @@ class Pager extends BaseConfig
 	 * @var array<string, string>
 	 */
 	public $templates = [
-		'default_full'   => 'CodeIgniter\Pager\Views\default_full',
+		'default_full'   => 'App\Views\pager.html',
 		'default_simple' => 'CodeIgniter\Pager\Views\default_simple',
 		'default_head'   => 'CodeIgniter\Pager\Views\default_head',
 	];
@@ -35,5 +49,5 @@ class Pager extends BaseConfig
 	 *
 	 * @var integer
 	 */
-	public $perPage = 20;
+	public $perPage = 10;
 }

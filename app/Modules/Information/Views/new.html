@@ -1,0 +1,36 @@
+<?= $this->extend('Information\container.html') ?>
+
+<?= $this->section('content') ?>
+<div class="my-3">
+  <nav style="--bs-breadcrumb-divider: '|';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">
+        <i class="fas fa-edit"></i>
+        <?= lang('App.new') ?>
+      </li>
+    </ol>
+  </nav>
+  <div class="my-3">
+    <?= $this->include('Information\alerts.html') ?>
+  </div>
+  <?= form_open('/informations/create') ?>
+  <?= $this->include('Information\inputs.html') ?>
+  <div class="d-flex flex-column flex-sm-row-reverse justify-content-between">
+    <button class="my-3 btn btn-success">
+      <i class="fas fa-check"></i>
+      <?= lang('App.save') ?>
+    </button>
+    <a class="my-3 btn btn-link" href="/informations">
+      <i class="fas fa-chevron-left"></i>
+      <?= lang('App.backToIndex') ?>
+    </a>
+  </div>
+  <?= form_close() ?>
+</div>
+<?= $this->endSection() ?>
+
+<?= $this->section('style') ?>
+<?= $this->endSection() ?>
+
+<?= $this->section('script') ?>
+<?= $this->endSection() ?>

@@ -52,6 +52,7 @@ class Autoload extends AutoloadConfig
 		APP_NAMESPACE => APPPATH,
 		'Config'      => APPPATH . 'Config',
 		'Common'      => APPPATH . 'Modules/Common',
+		'Information' => APPPATH . 'Modules/Information',
 	];
 
 	/**

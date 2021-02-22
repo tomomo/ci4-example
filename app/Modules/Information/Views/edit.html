@@ -1,0 +1,73 @@
+<?= $this->extend('Information\container.html') ?>
+
+<?= $this->section('content') ?>
+<div class="my-3">
+  <nav style="--bs-breadcrumb-divider: '|';" aria-label="breadcrumb">
+    <div class="d-flex flex-column flex-md-row justify-content-between">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">
+          <i class="fas fa-edit"></i>
+          <?=lang('App.edit') ?>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="/informations/remove/<?= $information->id ?>">
+            <i class="fas fa-trash"></i>
+            <?= lang('App.remove') ?>
+          </a>
+        </li>
+      </ol>
+      <div>
+        <a class="btn btn-secondary" href="/informations/new/<?= $information->id ?>">
+          <i class="fas fa-copy"></i>
+          <?= lang('App.copy') ?>
+        </a>
+      </div>
+    </div>
+  </nav>
+  <div class="my-3">
+    <?= $this->include('Information\alerts.html') ?>
+  </div>
+  <?= form_open('/informations/update/' . $information->id) ?>
+  <div class="my-3">
+    <?= $this->include('Information\inputs.html') ?>
+  </div>
+  <div class="d-flex flex-column flex-sm-row-reverse justify-content-between">
+    <button class="my-3 btn btn-success">
+      <i class="fas fa-check"></i>
+      <?= lang('App.save') ?>
+    </button>
+    <?= anchor(get_cookie('informations_search') ?? '/informations',
+      '<i class="fas fa-chevron-left"></i> ' . lang('App.backToIndex'),
+      'class="my-3 btn btn-link"'
+    ) ?>
+  </div>
+  <?= form_close() ?>
+</div>
+<?= $this->endSection() ?>
+
+<?= $this->section('style') ?>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/flatpickr.min.css" integrity="sha512-OtwMKauYE8gmoXusoKzA/wzQoh7WThXJcJVkA29fHP58hBF7osfY0WLCIZbwkeL9OgRCxtAfy17Pn3mndQ4PZQ==" crossorigin="anonymous" />
+<?= $this->endSection() ?>
+
+<?= $this->section('script') ?>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/flatpickr.min.js" integrity="sha512-+ruHlyki4CepPr07VklkX/KM5NXdD16K1xVwSva5VqOVbsotyCQVKEwdQ1tAeo3UkHCXfSMtKU/mZpKjYqkxZA==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/l10n/ja.min.js" integrity="sha512-XamS5TTeqwEqePo/YxW3AFGwvEcQzN520Om7b1eB/LYHt6tLgXZeutZPPF8D0sIo7YndJEpCEhKwvf62U780Dw==" crossorigin="anonymous"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  flatpickr("#releaseStartAt", {
+    locale: 'ja'
+  });
+  flatpickr("#releaseFinishAt", {});
+}, false);
+</script>
+<script>
+document.querySelectorAll('.btn-outline-secondary').forEach((btn) => {
+  const dt = btn.parentNode.children[0];
+  if (dt) {
+    dt.style.backgroundColor = 'white';
+    // dt.removeAttribute('backgroundColor');
+    btn.addEventListener('click', () => (dt.value = null), false);
+  }
+});
+</script>
+<?= $this->endSection() ?>

@@ -7,17 +7,17 @@
       <ol class="breadcrumb">
         <li class="breadcrumb-item active" aria-current="page">
           <i class="fas fa-edit"></i>
-          <?=lang('App.edit') ?>
+          <?= lang('App.edit') ?>
         </li>
         <li class="breadcrumb-item">
-          <a href="/informations/remove/<?= $information->id ?>">
+          <a href="<?= url_to('information.remove', $information->id) ?>">
             <i class="fas fa-trash"></i>
             <?= lang('App.remove') ?>
           </a>
         </li>
       </ol>
       <div>
-        <a class="btn btn-secondary" href="/informations/new/<?= $information->id ?>">
+        <a class="btn btn-secondary" href="<?= url_to('information.copy', $information->id) ?>">
           <i class="fas fa-copy"></i>
           <?= lang('App.copy') ?>
         </a>
@@ -36,10 +36,10 @@
       <i class="fas fa-check"></i>
       <?= lang('App.save') ?>
     </button>
-    <?= anchor(get_cookie('informations_search') ?? '/informations',
-      '<i class="fas fa-chevron-left"></i> ' . lang('App.backToIndex'),
-      'class="my-3 btn btn-link"'
-    ) ?>
+    <a class="my-3 btn btn-link" href="<?= url_to('information.index') . get_cookie('informations_search') ?>">
+      <i class="fas fa-chevron-left"></i>
+      <?= lang('App.backToIndex') ?>
+    </a>
   </div>
   <?= form_close() ?>
 </div>

@@ -30,7 +30,8 @@ class Informations extends BaseController
 		helper(['form', 'cookie']);
 
 		$params = $this->request->getGet();
-		setCookie('informations_search', $this->request->getServer('REQUEST_URI'));
+		$qs     = $this->request->getServer('QUERY_STRING');
+		setCookie('informations_search', (empty($qs) ? '' : '?' . $qs));
 
 		$informationModel = model('InformationModel');
 		$informationItems = $informationModel->search($params);
@@ -137,9 +138,9 @@ class Informations extends BaseController
 		}
 		$id = $informationModel->insertID();
 		return redirect()
+			->route('information.edit', [$id])
 			->with('success', lang('App.successfullyCreated') . ' ' .
-				anchor('/informations/new', lang('App.createModeNewData')))
-			->to('/informations/edit/' . $id);
+				anchor('/informations/new', lang('App.createModeNewData')));
 	}
 
 	/**
@@ -168,8 +169,8 @@ class Informations extends BaseController
 		}
 
 		return redirect()
-			->with('success', lang('App.successfullyUpdated'))
-			->to('/informations/edit/' . $id);
+			->route('information.edit', [$id])
+			->with('success', lang('App.successfullyUpdated'));
 	}
 
 	/**
@@ -185,7 +186,7 @@ class Informations extends BaseController
 
 		$result = $informationModel->delete($id);
 		return redirect()
-			->with('success', lang('App.successfullyDeleted'))
-			->to('/informations');
+			->route('information.index')
+			->with('success', lang('App.successfullyDeleted'));
 	}
 }

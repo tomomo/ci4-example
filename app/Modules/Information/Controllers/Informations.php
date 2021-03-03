@@ -66,7 +66,7 @@ class Informations extends BaseController
 		}
 		else
 		{
-			$information = new \Information\Entities\Information();
+			$information = new InformationEntity();
 		}
 
 		$data = compact('information');
